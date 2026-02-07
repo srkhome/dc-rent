@@ -139,11 +139,11 @@
             return (
                 <div className="relative min-h-screen bg-slate-100 py-8 px-4 font-sans text-slate-800">
                     
-                    {/* 回首頁按鈕 */}
+                    {/* 回首頁按鈕 - 已修正連結與層級 */}
                     <a 
-                        href="https://www.zongguanjia.com.tw/" 
-                        className="absolute top-4 left-4 z-20 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md text-slate-600 font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 group"
-                        title="返回總管家首頁"
+                        href="index.html" 
+                        className="absolute top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md text-slate-600 font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 group cursor-pointer"
+                        title="返回首頁"
                     >
                         <IconArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
                         <span className="hidden sm:inline">回首頁</span>

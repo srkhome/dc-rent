@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>包租代管333政策 - 撲克牌卡片</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f4f8;
+        }
+
+        /* 撲克牌標準尺寸比例 2.5 : 3.5 */
+        .card-container {
+            width: 250px;
+            height: 350px;
+            perspective: 1000px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        /* 為了手機版適應，使用相對單位，但保持比例 */
+        @media (max-width: 640px) {
+            .card-container {
+                width: 80vw;
+                height: 112vw; /* 80 * 1.4 */
+                max-width: 250px;
+                max-height: 350px;
+            }
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 1rem;
+        }
+
+        /* 翻轉類 */
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* 正面樣式 */
+        .card-front {
+            background-color: #ffffff;
+            color: #1e3a8a; /* 深藍色 */
+        }
+
+        /* 背面樣式 */
+        .card-back {
+            background-color: #1e3a8a; /* 深藍色底 */
+            color: #ffffff;
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            padding-top: 2rem;
+        }
+
+        .highlight-text {
+            color: #fbbf24; /* 金色強調 */
+            font-weight: bold;
+        }
+
+        /* 裝飾線條 */
+        .border-deco {
+            border: 1px solid #fbbf24;
+            width: 90%;
+            height: 90%;
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            border-radius: 0.75rem;
+            pointer-events: none;
+        }
+
+        /* 列印專用樣式 */
+        @media print {
+            body {
+                background-color: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-container {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 20px !important;
+            }
+            .card-container {
+                page-break-inside: avoid;
+                margin: 10px;
+                /* 列印時強制顯示兩面需要特殊處理，這裡我們選擇列印正面和背面並排的設計邏輯，
+                   或者建議使用者列印兩次。為了簡單起見，這裡設定列印時不翻轉，保持當前狀態 */
+            }
+            /* 強制背景色列印 */
+            .card-front, .card-back {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center py-10 relative">
+
+    <!-- 回首頁按鈕 (新增) -->
+    <!-- 請將 href="index.html" 改為您官網實際的首頁連結，如果就在同一層目錄則不用改 -->
+    <a href="index.html" class="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white text-blue-900 rounded-full shadow-md hover:bg-blue-50 transition duration-300 no-print z-50">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        <span class="font-medium text-sm">回首頁</span>
+    </a>
+
+    <!-- 標題區 -->
+    <div class="text-center mb-8 no-print">
+        <h1 class="text-3xl font-bold text-slate-800 mb-2">包租代管 333 政策</h1>
+        <p class="text-slate-500">點擊卡片可查看詳細內容（或是按 Ctrl+P 列印）</p>
+        <p class="text-sm text-blue-600 mt-2 font-medium">總管家 專屬設計</p>
+    </div>
+
+    <!-- 卡片容器 -->
+    <div class="print-container flex flex-wrap justify-center gap-6 max-w-5xl">
+
+        <!-- 卡片 1: 三稅有減免 -->
+        <div class="card-container" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <!-- 正面 -->
+                <div class="card-front">
+                    <div class="border-deco"></div>
+                    <i data-lucide="coins" class="w-16 h-16 text-blue-800 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2">3稅</h2>
+                    <p class="text-xl font-medium text-slate-600">有減免</p>
+                    <div class="mt-8 text-xs text-slate-400">總管家</div>
+                </div>
+                <!-- 背面 -->
+                <div class="card-back">
+                    <div class="border-deco" style="border-color: rgba(251, 191, 36, 0.3);"></div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400 border-b border-yellow-400 pb-1">賦稅優惠</h3>
+                    <ul class="text-left text-sm space-y-3 w-full px-2">
+                        <li>
+                            <strong class="block text-yellow-200">綜合所得稅</strong>
+                            每屋每月 <span class="highlight-text">1.5萬元</span> 免稅。<br>
+                            超過部分扣除 <span class="highlight-text">60%</span> 費用。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">房屋稅</strong>
+                            比照自用住宅稅率<br>(依各縣市規定，約1.2%)。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">地價稅</strong>
+                            比照自用住宅稅率<br>(依各縣市規定，約2‰)。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片 2: 三費有補助 -->
+        <div class="card-container" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <!-- 正面 -->
+                <div class="card-front">
+                    <div class="border-deco"></div>
+                    <i data-lucide="hammer" class="w-16 h-16 text-blue-800 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2">3費</h2>
+                    <p class="text-xl font-medium text-slate-600">有補助</p>
+                    <div class="mt-8 text-xs text-slate-400">總管家</div>
+                </div>
+                <!-- 背面 -->
+                <div class="card-back">
+                    <div class="border-deco" style="border-color: rgba(251, 191, 36, 0.3);"></div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400 border-b border-yellow-400 pb-1">費用補助</h3>
+                    <ul class="text-left text-sm space-y-3 w-full px-2">
+                        <li>
+                            <strong class="block text-yellow-200">修繕費</strong>
+                            每年每屋最高補助<br><span class="highlight-text">8,000 元</span> (實支實付)。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">公證費</strong>
+                            雙北最高 <span class="highlight-text">4,500 元</span><br>
+                            其他縣市 <span class="highlight-text">3,000 元</span>。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">居家安全險</strong>
+                            每年每屋最高補助<br><span class="highlight-text">3,500 元</span>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片 3: 三年有服務 -->
+        <div class="card-container" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <!-- 正面 -->
+                <div class="card-front">
+                    <div class="border-deco"></div>
+                    <i data-lucide="shield-check" class="w-16 h-16 text-blue-800 mb-4"></i>
+                    <h2 class="text-2xl font-bold mb-2">3年</h2>
+                    <p class="text-xl font-medium text-slate-600">有服務</p>
+                    <div class="mt-8 text-xs text-slate-400">總管家</div>
+                </div>
+                <!-- 背面 -->
+                <div class="card-back">
+                    <div class="border-deco" style="border-color: rgba(251, 191, 36, 0.3);"></div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400 border-b border-yellow-400 pb-1">專業管理</h3>
+                    <ul class="text-left text-sm space-y-3 w-full px-2">
+                        <li>
+                            <strong class="block text-yellow-200">專業代管</strong>
+                            由業者負責招租、簽約、收租、管理，房東免煩惱。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">免費服務</strong>
+                            仲介費、代管費由<br><span class="highlight-text">政府全額補助</span>。
+                        </li>
+                        <li>
+                            <strong class="block text-yellow-200">合約保障</strong>
+                            包租/代管合約<br>提供<span class="highlight-text">3年</span>穩定服務。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 底部操作說明 -->
+    <div class="mt-10 text-center no-print">
+        <p class="text-xs text-slate-400 mt-4">建議使用彩色印表機並選擇「列印背景圖形」以獲得最佳效果。</p>
+        <p class="text-xs text-slate-400">列印後將紙張對折黏貼，即可完成雙面卡片。</p>
+    </div>
+
+    <script>
+        // 初始化圖標
+        lucide.createIcons();
+    </script>
+</body>
+</html>
