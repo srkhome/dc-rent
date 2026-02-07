@@ -76,12 +76,10 @@
                     <a href="guest.html" class="text-gray-600 hover:text-blue-900 px-3 py-2 rounded-md font-medium">房客專區</a>
                     <a href="#policy-333" class="text-gray-600 hover:text-blue-900 px-3 py-2 rounded-md font-medium">333政策</a>
                     <a href="#contact" class="text-gray-600 hover:text-blue-900 px-3 py-2 rounded-md font-medium">聯絡資訊</a>
-                    <!-- 修改：連結至 #policy-333 -->
                     <a href="#policy-333" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition flex items-center">
                         <i class="fa-solid fa-hand-holding-heart mr-1"></i> 社會住宅包租代管333
                     </a>
                 </div>
-                <!-- 修改：手機版連結至 #policy-333 -->
                 <div class="md:hidden">
                     <a href="#policy-333" class="text-blue-600 font-bold border border-blue-600 px-3 py-1 rounded text-sm">
                         社宅專案333
@@ -124,7 +122,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 修改：連結至 #policy-333 -->
                 <a href="#policy-333" class="group block h-full">
                     <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-blue-600 text-center h-full transform group-hover:-translate-y-1">
                         <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition">
@@ -157,6 +154,13 @@
                         遇到房屋修繕問題不用慌，我們有配合的專業工班，迅速排除狀況，維持房屋最佳狀態。
                     </p>
                 </div>
+            </div>
+
+            <!-- 新增：房東專區導引按鈕 -->
+            <div class="text-center mt-12">
+                <a href="owner.html" class="inline-block border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold text-lg px-8 py-3 rounded-full transition duration-300 shadow-md">
+                    <i class="fa-solid fa-arrow-right mr-2"></i> 前往房東專區 (查看詳細介紹)
+                </a>
             </div>
         </div>
     </section>
@@ -202,13 +206,15 @@
                 </div>
             </div>
 
-            <div class="text-center">
-                <!-- 修改：連結至 #policy-333 -->
-                <a href="#policy-333" class="inline-flex items-center justify-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    <i class="fa-solid fa-search mr-2"></i> 了解更多：社會住宅包租代管333
+            <div class="text-center flex flex-col sm:flex-row justify-center gap-4">
+                <!-- 新增：房客專區導引按鈕 (guest.html) -->
+                <a href="guest.html" class="inline-flex items-center justify-center bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <i class="fa-solid fa-user-check mr-2"></i> 前往房客專區 (尋找物件)
                 </a>
-                <p class="mt-4 text-sm text-gray-500">點擊上方按鈕，查看詳細政策說明</p>
+                
+                
             </div>
+            <p class="text-center mt-4 text-sm text-gray-500">點擊上方按鈕，查看詳細資訊</p>
         </div>
     </section>
 
