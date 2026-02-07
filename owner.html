@@ -1,0 +1,275 @@
+import React, { useState } from 'react';
+import { User, Heart, Briefcase, Home, Info, CheckCircle, AlertCircle, Calculator, ExternalLink, ArrowLeft } from 'lucide-react';
+
+const LandlordCards = () => {
+  // 定義卡片數據
+  const cards = [
+    {
+      id: 1,
+      title: "一般出租人",
+      icon: <User size={48} className="text-gray-600" />,
+      theme: "bg-gray-100",
+      backContent: [
+        { label: "免稅額", value: "沒有免稅額", highlight: false },
+        { label: "必要扣除額", value: "43%", highlight: false },
+        { label: "管理", value: "大小事都要自己來", highlight: false },
+        { label: "補助", value: "沒有任何補助費用", highlight: false },
+        { label: "稅率", value: "地價稅與房屋稅為非自用住宅稅率", highlight: false },
+      ]
+    },
+    {
+      id: 2,
+      title: "公益出租人",
+      icon: <Heart size={48} className="text-red-500" />,
+      theme: "bg-red-50",
+      backContent: [
+        { label: "免稅額", value: "每月 15,000 元", highlight: true },
+        { label: "必要扣除額", value: "43%", highlight: false },
+        { label: "管理", value: "大小事都要自己來", highlight: false },
+        { label: "補助", value: "沒有任何補助費用", highlight: false },
+        { label: "稅率", value: "地價稅與房屋稅為自用住宅稅率", highlight: true },
+      ]
+    },
+    {
+      id: 3,
+      title: "委託包租代管業出租人",
+      icon: <Briefcase size={48} className="text-blue-600" />,
+      theme: "bg-blue-50",
+      backContent: [
+        { label: "免稅額", value: "每月 6,000 元", highlight: true },
+        { label: "必要扣除額", value: "2萬以下 53% / 2萬以上 43%", highlight: true },
+        { label: "管理", value: "花錢請專人處理大小事", highlight: true },
+        { label: "補助", value: "沒有任何補助費用", highlight: false },
+        { label: "稅率", value: "地價稅與房屋稅為非自用住宅稅率", highlight: false },
+      ]
+    },
+    {
+      id: 4,
+      title: "社會住宅出租人",
+      icon: <Home size={48} className="text-green-600" />,
+      theme: "bg-green-50",
+      backContent: [
+        { label: "免稅額", value: "每月 15,000 元", highlight: true },
+        { label: "必要扣除額", value: "60%", highlight: true },
+        { label: "管理", value: "有免費專人處理大小事", highlight: true },
+        { label: "補助", value: "公證費3000、保險3500、修繕10000", highlight: true },
+        { label: "稅率", value: "地價稅與房屋稅比照自用住宅稅率", highlight: true },
+      ]
+    }
+  ];
+
+  return (
+    <div className="relative min-h-screen bg-slate-100 py-8 px-4 font-sans text-slate-800">
+      
+      {/* 回首頁按鈕 - 左上角懸浮 */}
+      <a 
+        href="https://www.zongguanjia.com.tw/" 
+        className="absolute top-4 left-4 z-20 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md text-slate-600 font-medium hover:bg-blue-600 hover:text-white transition-all duration-300 group"
+        title="返回總管家首頁"
+      >
+        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+        <span className="hidden sm:inline">回首頁</span>
+      </a>
+
+      {/* Header / Brand Area */}
+      <header className="max-w-5xl mx-auto mb-8 text-center pt-8 md:pt-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2 tracking-tight">
+          總管家包租代管
+        </h1>
+        <p className="text-slate-500 text-lg">出租人權益與資格速查表</p>
+      </header>
+
+      {/* 上半部：出租人資格 */}
+      <section className="max-w-3xl mx-auto mb-12">
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+          <div className="bg-slate-800 text-white p-4 flex items-center gap-2">
+            <Info size={24} />
+            <h2 className="text-xl font-bold">出租人資格檢核</h2>
+          </div>
+          <div className="p-6 md:p-8">
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4">
+                <div className="mt-1 bg-blue-100 p-2 rounded-full text-blue-600">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">建物的所有權人</h3>
+                  <p className="text-slate-600">必須是房屋權狀上的所有權人，方可申請相關身分認定。</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="mt-1 bg-blue-100 p-2 rounded-full text-blue-600">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">為獨立門牌的合法建物</h3>
+                  <p className="text-slate-600">亦即非違章建築，且擁有獨立的戶政門牌編號。</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="mt-1 bg-amber-100 p-2 rounded-full text-amber-600">
+                  <AlertCircle size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">需要有按時繳稅</h3>
+                  <p className="text-slate-600">
+                    若房東未按時繳納房屋稅等稅金，<span className="font-bold text-red-600">承租人將無法順利申請並收到租金補助款</span>。
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* 下半部：撲克牌比較區 */}
+      <section className="max-w-5xl mx-auto mb-16">
+        <h2 className="text-2xl font-bold text-center mb-6 text-slate-800">各類出租人權益比較 (點擊翻牌)</h2>
+        
+        {/* Grid Layout for Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cards.map((card) => (
+            <FlipCard key={card.id} card={card} />
+          ))}
+        </div>
+      </section>
+
+      {/* 底部：Google 試算表嵌入區 */}
+      <section className="max-w-5xl mx-auto mb-12">
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+          <div className="bg-slate-800 text-white p-4 flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <Calculator size={24} />
+              <h2 className="text-xl font-bold">稅賦優惠試算</h2>
+            </div>
+            <span className="text-xs bg-slate-700 px-2 py-1 rounded text-slate-200">
+              即時連線 Google 試算表
+            </span>
+          </div>
+          
+          <div className="relative w-full h-[600px] bg-slate-50">
+            {/* 說明文字 */}
+            <div className="absolute top-0 left-0 w-full p-2 bg-yellow-50 text-yellow-800 text-xs text-center border-b border-yellow-100 z-10">
+              若無法在下方直接輸入，請點擊底部連結開啟完整視窗。
+            </div>
+            
+            {/* iframe 嵌入 */}
+            <iframe 
+              src="https://docs.google.com/spreadsheets/d/1lG0gt7Jb1xDEynr8CiFWSv49mx769zMmypGxrZkoR34/edit?usp=sharing&rm=minimal" 
+              className="w-full h-full border-0 pt-8" 
+              title="總管家包租代管稅賦試算"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div className="bg-slate-50 p-4 text-center border-t border-slate-200">
+             <a 
+               href="https://docs.google.com/spreadsheets/d/1lG0gt7Jb1xDEynr8CiFWSv49mx769zMmypGxrZkoR34/edit?usp=drive_link" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm"
+             >
+               <ExternalLink size={18} />
+               全螢幕開啟試算表
+             </a>
+             <p className="mt-2 text-xs text-slate-500">
+               * 此試算表由總管家包租代管提供，僅供參考，實際稅額以稅捐稽徵處核定為準。
+             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-12 text-center text-slate-400 text-sm pb-8">
+        <p>&copy; {new Date().getFullYear()} 總管家包租代管 | Powered by 宜仁居家有限公司</p>
+      </footer>
+    </div>
+  );
+};
+
+// 獨立的翻轉卡片組件
+const FlipCard = ({ card }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  return (
+    <div 
+      className="group perspective-1000 h-[480px] cursor-pointer"
+      onClick={handleFlip}
+    >
+      <div 
+        className={`relative w-full h-full transition-all duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}
+      >
+        {/* 正面 (Front) */}
+        <div className={`absolute w-full h-full backface-hidden rounded-xl shadow-xl border-4 border-white flex flex-col items-center justify-center p-6 ${card.theme}`}>
+          {/* 裝飾性花紋 (模擬撲克牌角落) */}
+          <div className="absolute top-2 left-2 text-slate-300 opacity-50 text-xl font-serif">A</div>
+          <div className="absolute bottom-2 right-2 text-slate-300 opacity-50 text-xl font-serif rotate-180">A</div>
+          
+          <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+            {card.icon}
+          </div>
+          <h3 className="text-2xl font-bold text-slate-800 text-center leading-tight">
+            {card.title}
+          </h3>
+          <p className="mt-4 text-sm text-slate-500 font-medium bg-white/60 px-3 py-1 rounded-full">
+            點擊查看詳情
+          </p>
+        </div>
+
+        {/* 背面 (Back) */}
+        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-white rounded-xl shadow-xl border-2 border-slate-200 p-5 flex flex-col justify-center">
+          <h4 className="text-lg font-bold text-center mb-4 text-slate-800 border-b pb-2">
+            {card.title}
+          </h4>
+          <div className="space-y-3 text-sm">
+            {card.backContent.map((item, index) => (
+              <div key={index} className="flex flex-col border-b border-slate-100 pb-2 last:border-0">
+                <span className="text-slate-400 text-xs mb-0.5">{item.label}</span>
+                <span className={`font-semibold leading-snug ${item.highlight ? 'text-blue-600' : 'text-slate-700'}`}>
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-auto pt-2 text-center">
+             <span className="text-xs text-slate-300">總管家包租代管</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// CSS Utility for Tailwind
+const styleTag = `
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+`;
+
+// Injecting styles into the component for portability
+const StyleWrapper = () => (
+  <style>{styleTag}</style>
+);
+
+const App = () => (
+  <>
+    <StyleWrapper />
+    <LandlordCards />
+  </>
+);
+
+export default App;

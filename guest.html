@@ -1,0 +1,302 @@
+import React, { useState } from 'react';
+import { User, Users, FileText, Ban, AlertCircle, Calculator, ExternalLink, Home, Wallet, CheckCircle2, ArrowLeft } from 'lucide-react';
+
+const FlipCard = ({ title, content, icon: Icon }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div 
+      className="group h-96 w-full cursor-pointer perspective-1000"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <div 
+        className={`relative h-full w-full transition-all duration-500 transform-style-3d ${
+          isFlipped ? 'rotate-y-180' : ''
+        }`}
+      >
+        {/* Front of Card */}
+        <div className="absolute h-full w-full rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 text-white shadow-xl backface-hidden flex flex-col items-center justify-center border-4 border-white/20">
+          <div className="mb-6 rounded-full bg-white/20 p-6 backdrop-blur-sm">
+            <Icon size={48} className="text-yellow-400" />
+          </div>
+          <h3 className="text-2xl font-bold tracking-wider text-center">{title}</h3>
+          <p className="mt-4 text-sm text-blue-200 opacity-80 flex items-center gap-1">
+            <CheckCircle2 size={14} />
+            點擊查看詳情
+          </p>
+          
+          {/* Decorative Elements mimicking a card */}
+          <div className="absolute top-4 left-4 text-white/30">
+            <Icon size={20} />
+          </div>
+          <div className="absolute bottom-4 right-4 text-white/30 transform rotate-180">
+            <Icon size={20} />
+          </div>
+        </div>
+
+        {/* Back of Card */}
+        <div className="absolute h-full w-full rounded-xl bg-white p-6 text-slate-800 shadow-xl rotate-y-180 backface-hidden border-2 border-blue-100 overflow-y-auto">
+          <div className="flex items-center gap-2 border-b border-blue-100 pb-3 mb-4">
+            <Icon className="text-blue-600" size={24} />
+            <h3 className="text-lg font-bold text-blue-900">{title}</h3>
+          </div>
+          <div className="space-y-3 text-sm leading-relaxed">
+            {content}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TaichungRentApp = () => {
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+      {/* Header / Brand Area */}
+      <header className="bg-slate-900 text-white py-6 relative">
+        <div className="container mx-auto px-4 relative flex items-center justify-center">
+          {/* Back to Home Button */}
+          <a 
+            href="/" 
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-400 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10"
+            aria-label="回到首頁"
+          >
+            <ArrowLeft size={20} />
+            <span className="hidden md:inline font-medium">回首頁</span>
+          </a>
+
+          <div className="text-center">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">台中市租屋補助 & 報稅指南</h1>
+            <p className="text-slate-400 text-sm">總管家包租代管 貼心整理</p>
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8 max-w-6xl">
+        
+        {/* Section 1: 台中市承租人資格 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="bg-blue-600 px-6 py-4 flex items-center gap-2">
+              <Home className="text-white" />
+              <h2 className="text-xl font-bold text-white">台中市承租人資格</h2>
+            </div>
+            
+            <div className="p-6 md:p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <ol className="list-decimal list-outside ml-5 space-y-3 font-medium text-slate-700">
+                    <li className="pl-2">
+                      <span className="font-bold text-slate-900">身分限制：</span>
+                      為本國國民，領有身分證之成年人。
+                    </li>
+                    <li className="pl-2">
+                      <span className="font-bold text-slate-900">無自有住宅：</span>
+                      戶籍內家庭成員於<span className="text-blue-600 font-bold">中彰投</span>沒有自有住宅。
+                    </li>
+                    <li className="pl-2">
+                      <span className="font-bold text-slate-900">所得限制：</span>
+                      家庭平均月收入低於 <span className="text-red-600 text-lg font-bold">56,270元</span>。
+                    </li>
+                    <li className="pl-2">
+                      <span className="font-bold text-slate-900">動產限制：</span>
+                      戶籍內家庭成員動產不超過 <span className="text-blue-600 font-bold">479萬</span>。
+                    </li>
+                    <li className="pl-2">
+                      <span className="font-bold text-slate-900">不動產限制：</span>
+                      戶籍內家庭成員不動產現值不超過 <span className="text-blue-600 font-bold">549萬</span>。
+                    </li>
+                  </ol>
+                </div>
+                
+                <div className="bg-blue-50 rounded-xl p-6 flex flex-col justify-center border border-blue-100">
+                  <h3 className="flex items-center gap-2 text-blue-800 font-bold mb-3">
+                    <Users size={20} />
+                    家庭成員定義：
+                  </h3>
+                  <ul className="space-y-2 text-slate-600">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-green-500" /> 本人
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-green-500" /> 配偶
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-green-500" /> 直系親屬 (父母、子女等)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: 租金申報所得稅 (Poker Cards) */}
+        <section className="mb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">租金申報所得稅</h2>
+            <div className="inline-block bg-yellow-100 text-yellow-800 px-4 py-1 rounded-full text-sm font-bold border border-yellow-200">
+              最高可扣除 18 萬元
+            </div>
+            <p className="mt-4 text-slate-500">點擊下方卡片翻轉查看詳情</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            {/* Card 1: 承租人資格 */}
+            <FlipCard 
+              title="承租人資格"
+              icon={User}
+              content={
+                <ol className="list-decimal list-outside ml-4 space-y-3">
+                  <li>
+                    <span className="font-bold text-blue-800">適用對象：</span>
+                    <br/>承租人需是你自己本人、配偶或受撫養的直系親屬。
+                  </li>
+                  <li>
+                    <span className="font-bold text-blue-800">使用性質：</span>
+                    <br/>承租人租屋需以「自住需求」為主，<span className="text-red-500 font-bold">沒有營業使用</span>。
+                  </li>
+                </ol>
+              }
+            />
+
+            {/* Card 2: 排富條款 */}
+            <FlipCard 
+              title="排富條款"
+              icon={Ban}
+              content={
+                <div className="space-y-2">
+                  <p className="font-bold text-red-600 border-b pb-1 mb-2">以下情況將被排除 (X)：</p>
+                  <ul className="space-y-2 text-xs md:text-sm">
+                    <li className="flex gap-2">
+                      <span className="text-red-500 font-bold">X1.</span> 綜所稅適用稅率 20% 以上。
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-red-500 font-bold">X2.</span> 股利所得採 28% 分開計稅。
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-red-500 font-bold">X3.</span> 基本所得額超過最低稅負免稅額 (2024年為750萬元)。
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-red-500 font-bold">X4.</span> 本人、配偶、受扶養直系親屬在國內持有房屋。
+                    </li>
+                    <li className="flex gap-2 bg-yellow-50 p-1 rounded">
+                      <span className="text-blue-500 font-bold">Note:</span> 領有租金補貼者，應將補貼金額從租金支出中減除。
+                    </li>
+                  </ul>
+                </div>
+              }
+            />
+
+            {/* Card 3: 繳交文件 */}
+            <FlipCard 
+              title="繳交文件"
+              icon={FileText}
+              content={
+                <ol className="list-decimal list-outside ml-4 space-y-4">
+                  <li>
+                    <span className="font-bold text-blue-800 block">租賃契約正本</span>
+                    <span className="text-xs text-slate-500">需載明雙方身分證字號、地址、租金金額。</span>
+                  </li>
+                  <li>
+                    <span className="font-bold text-blue-800 block">租金付款證明</span>
+                    <span className="text-xs text-slate-500">如匯款明細、轉帳截圖或房東簽收收據。</span>
+                  </li>
+                  <li>
+                    <span className="font-bold text-blue-800 block">自住切結書或入戶籍證明</span>
+                    <span className="text-xs text-slate-500">證明該房屋為自住使用。</span>
+                  </li>
+                </ol>
+              }
+            />
+
+            {/* Card 4: 共住戶注意 */}
+            <FlipCard 
+              title="共住戶注意"
+              icon={AlertCircle}
+              content={
+                <div className="space-y-3">
+                  <div className="bg-red-50 p-2 rounded border border-red-100">
+                    <p className="font-bold text-red-700 text-sm mb-1">1. 分開簽約</p>
+                    <p className="text-xs text-slate-600">每個人都需與房東分開簽約，因為都需要<span className="font-bold">租賃契約正本</span>！</p>
+                  </div>
+                  <div className="bg-red-50 p-2 rounded border border-red-100">
+                    <p className="font-bold text-red-700 text-sm mb-1">2. 分開付租</p>
+                    <p className="text-xs text-slate-600">每個人分開付租金給房東，因為都需要<span className="font-bold">租金付款證明</span>！</p>
+                  </div>
+                  <div className="bg-blue-50 p-2 rounded border border-blue-100">
+                    <p className="font-bold text-blue-700 text-sm mb-1">3. 個別證明</p>
+                    <p className="text-xs text-slate-600">各自提供自住切結書或入戶籍證明。</p>
+                  </div>
+                </div>
+              }
+            />
+
+          </div>
+        </section>
+
+        {/* Section 3: 外部連結 */}
+        <section className="mt-12">
+          <div className="grid md:grid-cols-2 gap-6">
+            <a 
+              href="https://has.nlma.gov.tw/house300e/?" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center p-8 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 text-white"
+            >
+              <Home size={40} className="mb-3 group-hover:scale-110 transition-transform" />
+              <span className="text-2xl font-bold mb-1">三百億租補網站</span>
+              <span className="flex items-center gap-1 text-sm opacity-90">
+                前往申請 <ExternalLink size={14} />
+              </span>
+            </a>
+
+            <a 
+              href="https://pip.moi.gov.tw/Publicize/Info/B1021" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center p-8 bg-gradient-to-r from-teal-500 to-emerald-600 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 text-white"
+            >
+              <Calculator size={40} className="mb-3 group-hover:scale-110 transition-transform" />
+              <span className="text-2xl font-bold mb-1">三百億租補試算</span>
+              <span className="flex items-center gap-1 text-sm opacity-90">
+                立即試算 <ExternalLink size={14} />
+              </span>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-slate-400 py-8 mt-12">
+        <div className="container mx-auto px-4 text-center">
+          <p className="font-bold text-white mb-2">總管家包租代管</p>
+          <p className="text-xs">
+            資訊僅供參考，實際規定以政府最新公告為準。<br/>
+            Copyright © {new Date().getFullYear()} All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+
+      {/* CSS for 3D Flip Card Effect */}
+      <style jsx global>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .transform-style-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default TaichungRentApp;
